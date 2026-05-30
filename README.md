@@ -1,28 +1,130 @@
-# Cow wisdom web server
+# Wisecow DevOps Project
 
-## Prerequisites
+## Project Overview
 
+This project demonstrates containerization and deployment of the Wisecow application using Docker, Kubernetes (Minikube), and GitHub Actions CI/CD pipeline.
+
+## Technologies Used
+
+* Docker
+* Kubernetes
+* Minikube
+* GitHub Actions
+* Git
+* Ubuntu
+
+## Project Structure
+
+```text
+wisecow/
+│
+├── Dockerfile
+├── wisecow.sh
+├── README.md
+│
+├── k8s/
+│   ├── deployment.yaml
+│   └── service.yaml
+│
+└── .github/
+    └── workflows/
+        └── docker-build.yml
 ```
-sudo apt install fortune-mod cowsay -y
+
+## Docker Setup
+
+### Build Docker Image
+
+```bash
+docker build -t wisecow-app .
 ```
 
-## How to use?
+### Run Docker Container
 
-1. Run `./wisecow.sh`
-2. Point the browser to server port (default 4499)
+```bash
+docker run -d -p 4499:4499 --name wisecow-container wisecow-app
+```
 
-## What to expect?
-![wisecow](https://github.com/nyrahul/wisecow/assets/9133227/8d6bfde3-4a5a-480e-8d55-3fef60300d98)
+### Access Application
 
-# Problem Statement
-Deploy the wisecow application as a k8s app
+```text
+http://localhost:4499
+```
 
-## Requirement
-1. Create Dockerfile for the image and corresponding k8s manifest to deploy in k8s env. The wisecow service should be exposed as k8s service.
-2. Github action for creating new image when changes are made to this repo
-3. [Challenge goal]: Enable secure TLS communication for the wisecow app.
+---
 
-## Expected Artifacts
-1. Github repo containing the app with corresponding dockerfile, k8s manifest, any other artifacts needed.
-2. Github repo with corresponding github action.
-3. Github repo should be kept private and the access should be enabled for following github IDs: nyrahul
+## Kubernetes Deployment
+
+### Apply Deployment
+
+```bash
+kubectl apply -f k8s/deployment.yaml
+```
+
+### Apply Service
+
+```bash
+kubectl apply -f k8s/service.yaml
+```
+
+### Verify Pods
+
+```bash
+kubectl get pods
+```
+
+### Access Application via Minikube
+
+```bash
+minikube service wisecow-service
+```
+
+---
+
+## CI/CD Pipeline
+
+GitHub Actions workflow automatically:
+
+* Triggers on push to main branch
+* Builds Docker image
+* Verifies successful build process
+
+Workflow file:
+
+```text
+.github/workflows/docker-build.yml
+```
+
+---
+
+## Features Implemented
+
+* Dockerized Wisecow application
+* Kubernetes deployment using Minikube
+* Service exposure using NodePort
+* GitHub Actions CI pipeline
+* Public GitHub repository
+
+---
+
+## Screenshots
+
+### Running Docker Container
+
+![Running Docker Container](screenshots/running-docker-container.png)
+
+### Kubernetes Pods
+
+![Kubernetes Pods](screenshots/pods-running.png)
+
+### Application Browser Output
+
+![Browser Output](screenshots/wisecow-browser-output.png)
+
+### GitHub Actions Successful Workflow
+
+![GitHub Actions](screenshots/github-actions-success.png)
+
+### Minikube Service Exposure
+
+![Minikube Service](screenshots/minikube-service.png)
