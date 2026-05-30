@@ -109,10 +109,6 @@ Workflow file:
 
 ## Screenshots
 
-### Running Docker Container
-
-![Running Docker Container](screenshots/running-docker-container.png)
-
 ### Kubernetes Pods
 
 ![Kubernetes Pods](screenshots/pods-running.png)
@@ -128,3 +124,4 @@ Workflow file:
 ### Minikube Service Exposure
 
 ![Minikube Service](screenshots/minikube-service.png)
+
